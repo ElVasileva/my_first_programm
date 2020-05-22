@@ -1,3 +1,5 @@
+package sandbox;
+
 import static java.lang.Math.sqrt;
 
 public class MyFirstProgramm {
@@ -10,6 +12,13 @@ public class MyFirstProgramm {
 
         System.out.println("Расстояние между точками с координатами " + a.x + ";" + a.y +
                 " и " + b.x + ";" + b.y + " равно " + distance(a, b));
+
+
+        Square s = new Square(5);
+        System.out.println("Площадь квадрата со стороной " + s.l + " = " + s.area());
+
+        Rectangle r = new Rectangle(4, 6);
+        System.out.println("Площадь прямоугольника со сторонами " + r.a + " и " + r.b + " = " + r.area());
     }
 
 
@@ -20,5 +29,7 @@ public class MyFirstProgramm {
     public static double distance(Point a, Point b) {
         return sqrt(square(a.x - b.x) + square(a.y - b.y));
     }
+
+
 }
 

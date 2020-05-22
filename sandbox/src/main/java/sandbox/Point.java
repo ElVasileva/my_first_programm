@@ -1,3 +1,5 @@
+package sandbox;
+
 import static java.lang.Math.sqrt;
 
 public class Point {
@@ -9,5 +11,6 @@ public class Point {
         this.x = x;
         this.y = y;
     }
+
 
 }
