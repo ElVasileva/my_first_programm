@@ -11,6 +11,12 @@ public class Point {
         this.x = x;
         this.y = y;
     }
+    public double square(double a) {
+        return a * a;
+    }
 
+    public double distance(Point a, Point b) {
+        return sqrt(square(a.x - b.x) + square(a.y - b.y));
+    }
 
 }
