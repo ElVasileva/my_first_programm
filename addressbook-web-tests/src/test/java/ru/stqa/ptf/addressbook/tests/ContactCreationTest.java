@@ -5,6 +5,7 @@ import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import ru.stqa.ptf.addressbook.model.ContactData;
 
 public class ContactCreationTest {
   private WebDriver wd;
@@ -111,7 +112,7 @@ public class ContactCreationTest {
     wd.findElement(By.name("ayear")).sendKeys(contactData.getAnnyversaryYear());
     wd.findElement(By.name("new_group")).click();
     new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getContactGroup());
-    wd.findElement(By.xpath("(//option[@value='7'])[3]")).click();
+    wd.findElement(By.xpath("(//option[@value='7'])[2]")).click();
     wd.findElement(By.name("address2")).click();
     wd.findElement(By.name("address2")).clear();
     wd.findElement(By.name("address2")).sendKeys(contactData.getAddress2());
