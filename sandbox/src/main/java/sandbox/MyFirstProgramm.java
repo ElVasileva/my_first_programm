@@ -11,7 +11,7 @@ public class MyFirstProgramm {
 
 
         System.out.println("Расстояние между точками с координатами " + a.x + ";" + a.y +
-                " и " + b.x + ";" + b.y + " равно " + a.distance(a, b));
+                " и " + b.x + ";" + b.y + " равно " + a.distance(b));
 
 
         Square s = new Square(5);

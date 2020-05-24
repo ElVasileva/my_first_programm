@@ -15,8 +15,10 @@ public class Point {
         return a * a;
     }
 
-    public double distance(Point a, Point b) {
-        return sqrt(square(a.x - b.x) + square(a.y - b.y));
+
+
+    public double distance(Point b) {
+        return sqrt(square(this.x - b.x) + square(this.y - b.y));
     }
 
 }
