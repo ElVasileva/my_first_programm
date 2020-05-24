@@ -11,7 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
-    private WebDriver wd;
+    public WebDriver wd;
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() throws Exception {
@@ -21,7 +21,7 @@ public class TestBase {
         login("admin", "secret");
     }
 
-    private void login(String username, String password) {
+    public void login(String username, String password) {
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
         wd.findElement(By.name("user")).sendKeys(username);
@@ -65,7 +65,7 @@ public class TestBase {
         wd.quit();
     }
 
-    private void logout() {
+    public void logout() {
         wd.findElement(By.linkText("Logout")).click();
         wd.findElement(By.xpath("//html")).click();
     }
@@ -79,12 +79,20 @@ public class TestBase {
         }
     }
 
-    private boolean isAlertPresent() {
+    protected boolean isAlertPresent() {
         try {
             wd.switchTo().alert();
             return true;
         } catch (NoAlertPresentException e) {
             return false;
         }
+    }
+
+    protected void deleteSelectedGroups() {
+      wd.findElement(By.name("delete")).click();
+    }
+
+    protected void selectGroup() {
+      wd.findElement(By.name("selected[]")).click();
     }
 }
