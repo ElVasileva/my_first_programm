@@ -23,6 +23,7 @@ public class ApplicationManager {
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
+        contactHelper = new ContactHelper(wd);
         login("admin", "secret");
     }
 
@@ -43,24 +44,6 @@ public class ApplicationManager {
     public void logout() {
         wd.findElement(By.linkText("Logout")).click();
         wd.findElement(By.xpath("//html")).click();
-    }
-
-    public boolean isElementPresent(By by) {
-        try {
-            wd.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-
-    public boolean isAlertPresent() {
-        try {
-            wd.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
     }
 
     public GroupHelper getGroupHelper() {
