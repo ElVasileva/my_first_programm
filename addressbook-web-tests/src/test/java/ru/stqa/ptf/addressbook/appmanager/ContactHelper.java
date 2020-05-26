@@ -35,30 +35,46 @@ public class ContactHelper extends HelperBase {
         type(By.name("email2"), contactData.getEmail2());
         type(By.name("email3"), contactData.getEmail3());
         type(By.name("homepage"), contactData.getHomePage());
-        wd.findElement(By.name("bday")).click();
-        new Select(wd.findElement(By.name("bday"))).selectByVisibleText(contactData.getbDDay());
-        wd.findElement(By.xpath("(//option[@value='7'])[2]")).click();
-        wd.findElement(By.name("bmonth")).click();
-        new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactData.getbDMonht());
-        wd.findElement(By.xpath("//option[@value='June']")).click();
-        wd.findElement(By.name("byear")).click();
-        wd.findElement(By.name("byear")).clear();
-        wd.findElement(By.name("byear")).sendKeys(contactData.getbDYear());
-        wd.findElement(By.name("aday")).click();
-        new Select(wd.findElement(By.name("aday"))).selectByVisibleText(contactData.getAnnyversaryDay());
-        wd.findElement(By.xpath("(//option[@value='7'])[2]")).click();
-        wd.findElement(By.name("amonth")).click();
-        new Select(wd.findElement(By.name("amonth"))).selectByVisibleText(contactData.getAnnyversaryMonth());
-        wd.findElement(By.xpath("(//option[@value='June'])[2]")).click();
-        wd.findElement(By.name("ayear")).click();
-        wd.findElement(By.name("ayear")).clear();
-        wd.findElement(By.name("ayear")).sendKeys(contactData.getAnnyversaryYear());
-        wd.findElement(By.name("new_group")).click();
-        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getContactGroup());
-        wd.findElement(By.xpath("(//option[@value='7'])[2]")).click();
+        bday("bday", contactData.getbDDay(), "(//option[@value='7'])[2]");
+        bmonth("bmonth", contactData.getbDMonht(), "//option[@value='June']");
+        type(By.name("byear"), contactData.getbDYear());
+        aday("aday", contactData.getAnnyversaryDay(), "(//option[@value='7'])[2]");
+        amonth("amonth", contactData.getAnnyversaryMonth(), "(//option[@value='June'])[2]");
+        type(By.name("ayear"), contactData.getAnnyversaryYear());
+        group("new_group", contactData.getContactGroup(), "(//option[@value='7'])[2]");
         type(By.name("address2"), contactData.getAddress2());
         type(By.name("phone2"), contactData.getPhone2());
         type(By.name("notes"), contactData.getNotes());
+    }
+
+    private void amonth(String amonth, String annyversaryMonth, String s) {
+        wd.findElement(By.name(amonth)).click();
+        new Select(wd.findElement(By.name(amonth))).selectByVisibleText(annyversaryMonth);
+        wd.findElement(By.xpath(s)).click();
+    }
+
+    private void aday(String aday, String annyversaryDay, String s) {
+        wd.findElement(By.name(aday)).click();
+        new Select(wd.findElement(By.name(aday))).selectByVisibleText(annyversaryDay);
+        wd.findElement(By.xpath(s)).click();
+    }
+
+    private void bmonth(String bmonth, String s, String s2) {
+        wd.findElement(By.name(bmonth)).click();
+        new Select(wd.findElement(By.name(bmonth))).selectByVisibleText(s);
+        wd.findElement(By.xpath(s2)).click();
+    }
+
+    private void bday(String bday, String s, String s2) {
+        wd.findElement(By.name(bday)).click();
+        new Select(wd.findElement(By.name(bday))).selectByVisibleText(s);
+        wd.findElement(By.xpath(s2)).click();
+    }
+
+    private void group(String new_group, String contactGroup, String s) {
+        wd.findElement(By.name(new_group)).click();
+        new Select(wd.findElement(By.name(new_group))).selectByVisibleText(contactGroup);
+        wd.findElement(By.xpath(s)).click();
     }
 
 
