@@ -1,9 +1,13 @@
 package ru.stqa.ptf.addressbook.appmanager;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.ptf.addressbook.model.ContactData;
+import ru.stqa.ptf.addressbook.model.ContactDataByModification;
+
+import static org.testng.Assert.assertTrue;
 
 public class ContactHelper extends HelperBase {
 
@@ -12,11 +16,11 @@ public class ContactHelper extends HelperBase {
     }
 
     public void returnToContactPage() {
-        click(By.linkText("home page"));
+        click(By.id("1"), By.linkText("home page"));
     }
 
     public void initNewContact() {
-        click(By.linkText("add new"));
+        click(By.id("1"), By.linkText("add new"));
     }
 
     public void fillContactData(ContactData contactData) {
@@ -45,6 +49,27 @@ public class ContactHelper extends HelperBase {
         type(By.name("address2"), contactData.getAddress2());
         type(By.name("phone2"), contactData.getPhone2());
         type(By.name("notes"), contactData.getNotes());
+    }
+
+    public void fillContactDataByModification(ContactDataByModification contactDataByModification) {
+        type(By.name("firstname"), contactDataByModification.getFirstName());
+        type(By.name("middlename"), contactDataByModification.getMiddleName());
+        type(By.name("lastname"), contactDataByModification.getLastName());
+        type(By.name("nickname"), contactDataByModification.getNickName());
+        type(By.name("title"), contactDataByModification.getTittle());
+        type(By.name("company"), contactDataByModification.getCompany());
+        type(By.name("address"), contactDataByModification.getAddress());
+        type(By.name("home"), contactDataByModification.getHomePhone());
+        type(By.name("mobile"), contactDataByModification.getMobilePhone());
+        type(By.name("work"), contactDataByModification.getWorkPhone());
+        type(By.name("fax"), contactDataByModification.getFax());
+        type(By.name("email"), contactDataByModification.getEmail());
+        type(By.name("email2"), contactDataByModification.getEmail2());
+        type(By.name("email3"), contactDataByModification.getEmail3());
+        type(By.name("homepage"), contactDataByModification.getHomePage());
+        type(By.name("address2"), contactDataByModification.getAddress2());
+        type(By.name("phone2"), contactDataByModification.getPhone2());
+        type(By.name("notes"), contactDataByModification.getNotes());
     }
 
     private void amonth(String amonth, String annyversaryMonth, String s) {
@@ -79,7 +104,47 @@ public class ContactHelper extends HelperBase {
 
 
     public void submitContactCreation() {
-        click(By.xpath("(//input[@name='submit'])[2]"));
+        click(By.id("1"), By.xpath("(//input[@name='submit'])[2]"));
     }
 
+    public void modificateContact() {
+        click(By.id("1"), By.xpath("//img[@alt='Edit']"));
+    }
+
+    public void submitContactModification() {
+        click(By.xpath("//img[@alt='Edit']"), By.name("update"));
+    }
+
+    public void selectContact() {
+        click(By.id("1"), By.name("selected[]"));
+    }
+
+    public void deleteContacts() {
+        wd.findElement(By.xpath("//input[@value='Delete']")).click();
+    }
+
+    public void deleteContact() {
+        wd.findElement(By.xpath("(//input[@name='update'])[3]")).click();
+    }
+
+    public void acceptDeletion() {
+        assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+    }
+
+    private boolean acceptNextAlert = true;
+
+    private String closeAlertAndGetItsText() {
+        try {
+            Alert alert = wd.switchTo().alert();
+            String alertText = alert.getText();
+            if (acceptNextAlert) {
+                alert.accept();
+            } else {
+                alert.dismiss();
+            }
+            return alertText;
+        } finally {
+            acceptNextAlert = true;
+        }
+    }
 }
