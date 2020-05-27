@@ -1,22 +1,26 @@
 package ru.stqa.ptf.addressbook.appmanager;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.ptf.addressbook.model.ContactData;
+import ru.stqa.ptf.addressbook.model.ContactDataByModification;
 
-public class ContactHelper extends HelperBase{
+import static org.testng.Assert.assertTrue;
+
+public class ContactHelper extends HelperBase {
 
     public ContactHelper(WebDriver wd) {
         super(wd);
     }
 
     public void returnToContactPage() {
-        click(By.linkText("home page"));
+        click(By.id("1"), By.linkText("home page"));
     }
 
     public void initNewContact() {
-        click(By.linkText("add new"));
+        click(By.id("1"), By.linkText("add new"));
     }
 
     public void fillContactData(ContactData contactData) {
@@ -35,47 +39,112 @@ public class ContactHelper extends HelperBase{
         type(By.name("email2"), contactData.getEmail2());
         type(By.name("email3"), contactData.getEmail3());
         type(By.name("homepage"), contactData.getHomePage());
-
-
-//        bday(contactData, By.name("bday"));
-//        wd.findElement(By.name("bmonth")).click();
-//        new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactData.getbDMonht());
-//        wd.findElement(By.xpath("//option[@value='June']")).click();
-//        wd.findElement(By.name("byear")).click();
-//        wd.findElement(By.name("byear")).clear();
-//        wd.findElement(By.name("byear")).sendKeys(contactData.getbDYear());
-//        wd.findElement(By.name("aday")).click();
-//        new Select(wd.findElement(By.name("aday"))).selectByVisibleText(contactData.getAnnyversaryDay());
-//        wd.findElement(By.xpath("(//option[@value='7'])[2]")).click();
-//        wd.findElement(By.name("amonth")).click();
-//        new Select(wd.findElement(By.name("amonth"))).selectByVisibleText(contactData.getAnnyversaryMonth());
-//        wd.findElement(By.xpath("(//option[@value='June'])[2]")).click();
-
+        bday("bday", contactData.getbDDay(), "(//option[@value='7'])[2]");
+        bmonth("bmonth", contactData.getbDMonht(), "//option[@value='June']");
+        type(By.name("byear"), contactData.getbDYear());
+        aday("aday", contactData.getAnnyversaryDay(), "(//option[@value='7'])[2]");
+        amonth("amonth", contactData.getAnnyversaryMonth(), "(//option[@value='June'])[2]");
         type(By.name("ayear"), contactData.getAnnyversaryYear());
-        type(By.name("email3"), contactData.getEmail3());
-        type(By.name("homepage"), contactData.getHomePage());
-
-        wd.findElement(By.name("ayear")).click();
-        wd.findElement(By.name("ayear")).clear();
-        wd.findElement(By.name("ayear")).sendKeys(contactData.getAnnyversaryYear());
-        wd.findElement(By.name("new_group")).click();
-        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getContactGroup());
-        wd.findElement(By.xpath("(//option[@value='7'])[2]")).click();
-
+        group("new_group", contactData.getContactGroup(), "(//option[@value='7'])[2]");
         type(By.name("address2"), contactData.getAddress2());
         type(By.name("phone2"), contactData.getPhone2());
         type(By.name("notes"), contactData.getNotes());
     }
 
-    private void bday(ContactData contactData, By bday) {
-        wd.findElement(bday).click();
-        new Select(wd.findElement(bday)).selectByVisibleText(contactData.getbDDay());
-        wd.findElement(By.xpath("//option[@value='7']")).click();
+    public void fillContactDataByModification(ContactDataByModification contactDataByModification) {
+        type(By.name("firstname"), contactDataByModification.getFirstName());
+        type(By.name("middlename"), contactDataByModification.getMiddleName());
+        type(By.name("lastname"), contactDataByModification.getLastName());
+        type(By.name("nickname"), contactDataByModification.getNickName());
+        type(By.name("title"), contactDataByModification.getTittle());
+        type(By.name("company"), contactDataByModification.getCompany());
+        type(By.name("address"), contactDataByModification.getAddress());
+        type(By.name("home"), contactDataByModification.getHomePhone());
+        type(By.name("mobile"), contactDataByModification.getMobilePhone());
+        type(By.name("work"), contactDataByModification.getWorkPhone());
+        type(By.name("fax"), contactDataByModification.getFax());
+        type(By.name("email"), contactDataByModification.getEmail());
+        type(By.name("email2"), contactDataByModification.getEmail2());
+        type(By.name("email3"), contactDataByModification.getEmail3());
+        type(By.name("homepage"), contactDataByModification.getHomePage());
+        type(By.name("address2"), contactDataByModification.getAddress2());
+        type(By.name("phone2"), contactDataByModification.getPhone2());
+        type(By.name("notes"), contactDataByModification.getNotes());
+    }
+
+    private void amonth(String amonth, String annyversaryMonth, String s) {
+        wd.findElement(By.name(amonth)).click();
+        new Select(wd.findElement(By.name(amonth))).selectByVisibleText(annyversaryMonth);
+        wd.findElement(By.xpath(s)).click();
+    }
+
+    private void aday(String aday, String annyversaryDay, String s) {
+        wd.findElement(By.name(aday)).click();
+        new Select(wd.findElement(By.name(aday))).selectByVisibleText(annyversaryDay);
+        wd.findElement(By.xpath(s)).click();
+    }
+
+    private void bmonth(String bmonth, String s, String s2) {
+        wd.findElement(By.name(bmonth)).click();
+        new Select(wd.findElement(By.name(bmonth))).selectByVisibleText(s);
+        wd.findElement(By.xpath(s2)).click();
+    }
+
+    private void bday(String bday, String s, String s2) {
+        wd.findElement(By.name(bday)).click();
+        new Select(wd.findElement(By.name(bday))).selectByVisibleText(s);
+        wd.findElement(By.xpath(s2)).click();
+    }
+
+    private void group(String new_group, String contactGroup, String s) {
+        wd.findElement(By.name(new_group)).click();
+        new Select(wd.findElement(By.name(new_group))).selectByVisibleText(contactGroup);
+        wd.findElement(By.xpath(s)).click();
     }
 
 
     public void submitContactCreation() {
-        wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+        click(By.id("1"), By.xpath("(//input[@name='submit'])[2]"));
     }
 
+    public void modificateContact() {
+        click(By.id("1"), By.xpath("//img[@alt='Edit']"));
+    }
+
+    public void submitContactModification() {
+        click(By.xpath("//img[@alt='Edit']"), By.name("update"));
+    }
+
+    public void selectContact() {
+        click(By.id("1"), By.name("selected[]"));
+    }
+
+    public void deleteContacts() {
+        wd.findElement(By.xpath("//input[@value='Delete']")).click();
+    }
+
+    public void deleteContact() {
+        wd.findElement(By.xpath("(//input[@name='update'])[3]")).click();
+    }
+
+    public void acceptDeletion() {
+        assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+    }
+
+    private boolean acceptNextAlert = true;
+
+    private String closeAlertAndGetItsText() {
+        try {
+            Alert alert = wd.switchTo().alert();
+            String alertText = alert.getText();
+            if (acceptNextAlert) {
+                alert.accept();
+            } else {
+                alert.dismiss();
+            }
+            return alertText;
+        } finally {
+            acceptNextAlert = true;
+        }
+    }
 }

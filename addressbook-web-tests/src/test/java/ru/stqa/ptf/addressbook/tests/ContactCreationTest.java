@@ -1,12 +1,7 @@
 package ru.stqa.ptf.addressbook.tests;
 
-import java.util.concurrent.TimeUnit;
-import org.testng.annotations.*;
-import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbook.model.ContactData;
-import ru.stqa.ptf.addressbook.tests.TestBase;
 
 public class ContactCreationTest extends TestBase {
 
