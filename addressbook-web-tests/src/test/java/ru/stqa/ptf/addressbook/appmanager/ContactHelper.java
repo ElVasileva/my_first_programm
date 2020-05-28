@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.ptf.addressbook.model.ContactData;
-import ru.stqa.ptf.addressbook.model.ContactDataByModification;
 
 import static org.testng.Assert.assertTrue;
 
@@ -39,37 +38,9 @@ public class ContactHelper extends HelperBase {
         type(By.name("email2"), contactData.getEmail2());
         type(By.name("email3"), contactData.getEmail3());
         type(By.name("homepage"), contactData.getHomePage());
-        bday("bday", contactData.getbDDay(), "(//option[@value='7'])[2]");
-        bmonth("bmonth", contactData.getbDMonht(), "//option[@value='June']");
-        type(By.name("byear"), contactData.getbDYear());
-        aday("aday", contactData.getAnnyversaryDay(), "(//option[@value='7'])[2]");
-        amonth("amonth", contactData.getAnnyversaryMonth(), "(//option[@value='June'])[2]");
-        type(By.name("ayear"), contactData.getAnnyversaryYear());
-        group("new_group", contactData.getContactGroup(), "(//option[@value='7'])[2]");
         type(By.name("address2"), contactData.getAddress2());
         type(By.name("phone2"), contactData.getPhone2());
         type(By.name("notes"), contactData.getNotes());
-    }
-
-    public void fillContactDataByModification(ContactDataByModification contactDataByModification) {
-        type(By.name("firstname"), contactDataByModification.getFirstName());
-        type(By.name("middlename"), contactDataByModification.getMiddleName());
-        type(By.name("lastname"), contactDataByModification.getLastName());
-        type(By.name("nickname"), contactDataByModification.getNickName());
-        type(By.name("title"), contactDataByModification.getTittle());
-        type(By.name("company"), contactDataByModification.getCompany());
-        type(By.name("address"), contactDataByModification.getAddress());
-        type(By.name("home"), contactDataByModification.getHomePhone());
-        type(By.name("mobile"), contactDataByModification.getMobilePhone());
-        type(By.name("work"), contactDataByModification.getWorkPhone());
-        type(By.name("fax"), contactDataByModification.getFax());
-        type(By.name("email"), contactDataByModification.getEmail());
-        type(By.name("email2"), contactDataByModification.getEmail2());
-        type(By.name("email3"), contactDataByModification.getEmail3());
-        type(By.name("homepage"), contactDataByModification.getHomePage());
-        type(By.name("address2"), contactDataByModification.getAddress2());
-        type(By.name("phone2"), contactDataByModification.getPhone2());
-        type(By.name("notes"), contactDataByModification.getNotes());
     }
 
     private void amonth(String amonth, String annyversaryMonth, String s) {
