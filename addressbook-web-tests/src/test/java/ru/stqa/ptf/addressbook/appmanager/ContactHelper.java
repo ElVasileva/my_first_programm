@@ -16,11 +16,11 @@ public class ContactHelper extends HelperBase {
   }
 
   public void returnToContactPage() {
-    click(By.id("1"), By.linkText("home page"));
+    click(By.linkText("home page"));
   }
 
   public void initNewContact() {
-    click(By.id("1"), By.linkText("add new"));
+    click(By.linkText("add new"));
   }
 
   public void fillContactData(ContactData contactData, boolean creation) {
@@ -82,19 +82,23 @@ public class ContactHelper extends HelperBase {
 
 
   public void submitContactCreation() {
-    click(By.id("1"), By.xpath("(//input[@name='submit'])[2]"));
+    click(By.xpath("(//input[@name='submit'])[2]"));
   }
 
   public void modificateContact() {
-    click(By.id("1"), By.xpath("//img[@alt='Edit']"));
+    click(By.xpath("//img[@alt='Edit']"));
   }
 
+//  public void submitContactModification() {
+//    click(By.xpath("//img[@alt='Edit']"), By.name("update"));
+//  }
+
   public void submitContactModification() {
-    click(By.xpath("//img[@alt='Edit']"), By.name("update"));
+    click(By.name("update"));
   }
 
   public void selectContact() {
-    click(By.id("1"), By.name("selected[]"));
+    click(By.name("selected[]"));
   }
 
   public void deleteContacts() {

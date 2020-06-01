@@ -12,12 +12,12 @@ public class HelperBase {
     this.wd = wd;
   }
 
-  protected void click(By id, By locator) {
+  protected void click(By locator) {
     wd.findElement(locator).click();
   }
 
   protected void type(By locator, String text) {
-    click(By.id("1"), locator);
+    click(locator);
     if (text != null) {
       String existingText = wd.findElement(locator).getAttribute("value");
       if (! text.equals(existingText)) {

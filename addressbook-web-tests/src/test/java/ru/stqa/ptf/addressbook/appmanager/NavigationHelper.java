@@ -15,19 +15,19 @@ public class NavigationHelper extends HelperBase {
         && isElementPresent(By.name("new"))) {
       return;
     }
-    click(By.id("1"), By.linkText("groups"));
+    click(By.linkText("groups"));
   }
 
 
   public void gotoContacts() {
-    click(By.id("1"), By.id("content"));
+    click(By.id("content"));
   }
 
   public void gotoHomePage() {
     if (isElementPresent(By.id("maintable"))) {
       return;
     }
-    click(By.id("1"), By.linkText("home"));
+    click(By.linkText("home"));
   }
 
 }
