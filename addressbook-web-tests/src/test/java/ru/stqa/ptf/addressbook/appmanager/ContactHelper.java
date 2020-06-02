@@ -129,4 +129,16 @@ public class ContactHelper extends HelperBase {
       acceptNextAlert = true;
     }
   }
+
+  public void createContact(ContactData contact) {
+    initNewContact();
+    fillContactData(contact, true);
+    submitContactCreation();
+    returnToContactPage();
+
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.xpath("//img[@alt='Edit']"));
+  }
 }
