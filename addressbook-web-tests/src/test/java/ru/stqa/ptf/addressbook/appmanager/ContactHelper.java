@@ -3,9 +3,14 @@ package ru.stqa.ptf.addressbook.appmanager;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.ptf.addressbook.model.ContactData;
+import ru.stqa.ptf.addressbook.model.GroupData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
@@ -85,8 +90,8 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("(//input[@name='submit'])[2]"));
   }
 
-  public void modificateContact() {
-    click(By.xpath("//img[@alt='Edit']"));
+  public void modificateContact(int index) {
+    wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
   }
 
 //  public void submitContactModification() {
@@ -97,8 +102,8 @@ public class ContactHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public void selectContact() {
-    click(By.name("selected[]"));
+  public void selectContact(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
   public void deleteContacts() {
@@ -141,4 +146,20 @@ public class ContactHelper extends HelperBase {
   public boolean isThereAContact() {
     return isElementPresent(By.xpath("//img[@alt='Edit']"));
   }
+
+  public int getContactCount() {
+    return wd.findElements(By.xpath("//img[@alt='Edit']")).size();
+  }
+
+  public List<ContactData> getContactList() {
+    List<ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement> elements = wd.findElements(By.className("entry"));
+    for (WebElement element : elements) {
+      String firstname = element.getText();
+      ContactData contact = new ContactData(firstname, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+      contacts.add(contact);
+    }
+    return contacts;
+  }
+
 }
