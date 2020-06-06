@@ -151,15 +151,34 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.xpath("//img[@alt='Edit']")).size();
   }
 
+//  public List<ContactData> getContactList() {
+//    List<ContactData> contacts = new ArrayList<ContactData>();
+//    List<WebElement> elements = wd.findElements(By.xpath("//td/input"));
+//    for (WebElement element : elements) {
+//      String name = element.getText();
+//      ContactData contact = new ContactData(name, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+//      contacts.add(contact);
+//    }
+//    return contacts;
+//  }
+
   public List<ContactData> getContactList() {
     List<ContactData> contacts = new ArrayList<ContactData>();
-    List<WebElement> elements = wd.findElements(By.xpath("//td/input"));
-    for (WebElement element : elements) {
-      String name = element.getText();
+    List<WebElement> cells = wd.findElements(By.xpath("//td/input"));
+    for (WebElement cell : cells) {
+      String name = cell.getText();
       ContactData contact = new ContactData(name, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
       contacts.add(contact);
     }
     return contacts;
   }
+
+//  1) нужно найти все строки таблицы, содержащие информацию о контактах, и устроить цикл по этим элементам
+//2) внутри цикла каждую строку нужно разбить на ячейки
+//  List<WebElement> cells = element.findElements("td");
+//(где element это строка таблицы)
+//      3) после этого можно брать ячейки по порядковому номеру
+//      (номеру столбца), получать их текст, и использовать эти данные для построения модельного объекта,
+//  описывающего контакт
 
 }

@@ -20,6 +20,6 @@ public class ContactModificationTest extends TestBase {
     app.getContactHelper().fillContactData(new ContactData("Ivan", "Ivanovich", "Ivanov", "Vanja", "NewTitle", "Company", "Saint-Petersburg, Nevsky av., 1", "Ivan", "876876676", "8798788", "9879898", "vanja@mail.ru", "Ivanov@mail.ru", "Iv_iv@mail.ru", "7666766", "1", "Prosvetschenija, 1", "777789", "NewPerson"), false);
     app.getContactHelper().submitContactModification();
     List<ContactData> after = app.getContactHelper().getContactList();
-//    Assert.assertEquals(after.size(), before.size());
+    Assert.assertEquals(after.size(), before.size());
   }
 }
