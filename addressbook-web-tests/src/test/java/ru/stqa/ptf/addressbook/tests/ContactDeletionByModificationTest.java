@@ -1,7 +1,10 @@
 package ru.stqa.ptf.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbook.model.ContactData;
+
+import java.util.List;
 
 public class ContactDeletionByModificationTest extends TestBase {
 
@@ -11,7 +14,10 @@ public class ContactDeletionByModificationTest extends TestBase {
     if (!app.getContactHelper().isThereAContact()) {
       app.getContactHelper().createContact(new ContactData("test", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null));
     }
-    app.getContactHelper().modificateContact();
+    List<ContactData> before = app.getContactHelper().getContactList();
+    app.getContactHelper().modificateContact(1);
     app.getContactHelper().deleteContact();
+    List<ContactData> after = app.getContactHelper().getContactList();
+//    Assert.assertEquals(after.size(), before.size() - 1);
   }
 }
