@@ -1,6 +1,7 @@
 package ru.stqa.ptf.addressbook.model;
 
 public class ContactData {
+    private final String id;
     private final String firstName;
     private final String middleName;
     private final String lastName;
@@ -21,7 +22,8 @@ public class ContactData {
     private final String phone2;
     private final String notes;
 
-    public ContactData(String firstName, String middleName, String lastName, String nickName, String tittle, String company, String address, String homePage, String mobilePhone, String workPhone, String fax, String email, String email2, String email3, String homePhone, String group, String address2, String phone2, String notes) {
+    public ContactData(String id, String firstName, String middleName, String lastName, String nickName, String tittle, String company, String address, String homePage, String mobilePhone, String workPhone, String fax, String email, String email2, String email3, String homePhone, String group, String address2, String phone2, String notes) {
+        this.id = id;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -42,6 +44,30 @@ public class ContactData {
         this.phone2 = phone2;
         this.notes = notes;
     }
+
+    public ContactData(String id, String firstName, String lastName, String address2) {
+        this.id = null;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address2 = address2;
+        this.middleName = null;
+        this.nickName = null;
+        this.tittle = null;
+        this.company = null;
+        this.address = null;
+        this.homePhone = null;
+        this.mobilePhone = null;
+        this.workPhone = null;
+        this.fax = null;
+        this.email = null;
+        this.email2 = null;
+        this.email3 = null;
+        this.homePage = null;
+        this.group = null;
+        this.phone2 = null;
+        this.notes = null;
+    }
+
 
     public String getFirstName() {
         return firstName;
@@ -115,5 +141,42 @@ public class ContactData {
 
     public String getNotes() {
         return notes;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ContactData that = (ContactData) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
+        return address2 != null ? address2.equals(that.address2) : that.address2 == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (address2 != null ? address2.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactData{" +
+            "id='" + id + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", address2='" + address2 + '\'' +
+            '}';
+    }
+
+    public String getId() {
+        return id;
     }
 }
