@@ -16,8 +16,11 @@ public class ContactCreationTest extends TestBase {
     }
     app.getNavigationHelper().gotoContacts();
     List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().createContact(new ContactData("Ivan", "Ivanovich", "Ivanov", "Vanja", "NewTitle", "Company", "Saint-Petersburg, Nevsky av., 1", "7666766", "45565776", "777788", "777789", "vanja@mail.ru", "Ivanov@mail.ru", "Iv_iv@mail.ru", "ivanovPage", "new_group", "Prosvesheniya av., 1", "1", "NewPerson"));
+//    int before = app.getContactHelper().getContactCount();
+    app.getContactHelper().createContact(new ContactData(null,"Ivan", "Ivanovich", "Ivanov", "Vanja", "NewTitle", "Company", "Saint-Petersburg, Nevsky av., 1", "Ivan", "876876676", "8798788", "9879898", "vanja@mail.ru", "Ivanov@mail.ru", "Iv_iv@mail.ru", "7666766", "1", "Prosvetschenija, 1", "777789", "NewPerson"));
     List<ContactData> after = app.getContactHelper().getContactList();
+//    int after = app.getContactHelper().getContactCount();
     Assert.assertEquals(after.size(), before.size() + 1);
+//    Assert.assertEquals(after, before + 1);
   }
 }

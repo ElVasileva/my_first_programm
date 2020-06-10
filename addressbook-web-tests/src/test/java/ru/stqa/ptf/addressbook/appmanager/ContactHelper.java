@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.ptf.addressbook.model.ContactData;
-import ru.stqa.ptf.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -151,34 +150,42 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.xpath("//img[@alt='Edit']")).size();
   }
 
-//  public List<ContactData> getContactList() {
-//    List<ContactData> contacts = new ArrayList<ContactData>();
-//    List<WebElement> elements = wd.findElements(By.xpath("//td/input"));
-//    for (WebElement element : elements) {
-//      String name = element.getText();
-//      ContactData contact = new ContactData(name, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-//      contacts.add(contact);
-//    }
-//    return contacts;
-//  }
 
   public List<ContactData> getContactList() {
     List<ContactData> contacts = new ArrayList<ContactData>();
-    List<WebElement> cells = wd.findElements(By.xpath("//td/input"));
+    List<WebElement> elements = wd.findElements(By.cssSelector("tr"));
+    List<WebElement> cells = wd.findElements(By.name("entry"));
+
     for (WebElement cell : cells) {
-      String name = cell.getText();
-      ContactData contact = new ContactData(name, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+      String lastname = cell.getText();
+      String firstname = cell.getText();
+      String address2 = cell.getText();
+
+
+      ContactData contact = new ContactData(null, firstname, lastname, address2);
       contacts.add(contact);
     }
     return contacts;
   }
 
-//  1) нужно найти все строки таблицы, содержащие информацию о контактах, и устроить цикл по этим элементам
-//2) внутри цикла каждую строку нужно разбить на ячейки
-//  List<WebElement> cells = element.findElements("td");
-//(где element это строка таблицы)
-//      3) после этого можно брать ячейки по порядковому номеру
-//      (номеру столбца), получать их текст, и использовать эти данные для построения модельного объекта,
-//  описывающего контакт
+
+//  public List<ContactData> getContactList() {
+//    List<ContactData> contacts = new ArrayList<ContactData>();
+//    List<WebElement> elements = wd.findElements(By.cssSelector("tr"));
+//    List<WebElement> cells = wd.findElements(By.name("entry"));
+//
+//    for (WebElement cell : cells) {
+//      String id = cell.findElement(By.tagName("input")).getAttribute("value");
+//      String lastname = cell.getText();
+//      String firstname = cell.getText();
+//      String address2 = cell.getText();
+//
+//
+//      ContactData contact = new ContactData(id, firstname, lastname, address2);
+//      contacts.add(contact);
+//    }
+//    return contacts;
+//  }
+
 
 }
