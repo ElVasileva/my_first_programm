@@ -29,7 +29,7 @@ public class GroupHelper extends HelperBase {
     }
 
     public void initGroupCreation() {
-        click(By.xpath("(//input[@name='new'])[2]"));
+        click(By.xpath("//input[@name='new']"));
     }
 
     public void deleteSelectedGroups() {
