@@ -169,7 +169,7 @@ public class ContactData {
 
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
-        return address2 != null ? address.equals(that.address) : that.address == null;
+        return address != null ? address.equals(that.address) : that.address == null;
     }
 
     @Override
