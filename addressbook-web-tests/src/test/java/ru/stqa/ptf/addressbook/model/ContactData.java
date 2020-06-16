@@ -45,16 +45,16 @@ public class ContactData {
         this.notes = notes;
     }
 
-    public ContactData(int id, String firstName, String lastName, String address2) {
+    public ContactData(int id, String firstName, String lastName, String address) {
         this.id = Integer.MAX_VALUE;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address2 = address2;
+        this.address = address;
         this.middleName = null;
         this.nickName = null;
         this.tittle = null;
         this.company = null;
-        this.address = null;
+        this.address2 = null;
         this.homePhone = null;
         this.mobilePhone = null;
         this.workPhone = null;
@@ -156,7 +156,7 @@ public class ContactData {
         return "ContactData{" +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
-            ", address2='" + address2 + '\'' +
+            ", address='" + address + '\'' +
             '}';
     }
 
@@ -169,14 +169,14 @@ public class ContactData {
 
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
-        return address2 != null ? address2.equals(that.address2) : that.address2 == null;
+        return address2 != null ? address.equals(that.address) : that.address == null;
     }
 
     @Override
     public int hashCode() {
         int result = firstName != null ? firstName.hashCode() : 0;
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (address2 != null ? address2.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;
     }
 
