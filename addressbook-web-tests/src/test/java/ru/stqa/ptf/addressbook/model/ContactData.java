@@ -22,8 +22,8 @@ public class ContactData {
     private final String phone2;
     private final String notes;
 
-    public ContactData(int id, String firstName, String middleName, String lastName, String nickName, String tittle, String company, String address, String homePage, String mobilePhone, String workPhone, String fax, String email, String email2, String email3, String homePhone, String group, String address2, String phone2, String notes) {
-        this.id = id;
+
+    public ContactData(String firstName, String middleName, String lastName, String nickName, String tittle, String company, String address, String homePage, String mobilePhone, String workPhone, String fax, String email, String email2, String email3, String homePhone, String group, String address2, String phone2, String notes) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -154,7 +154,6 @@ public class ContactData {
     @Override
     public String toString() {
         return "ContactData{" +
-            "id='" + id + '\'' +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", address2='" + address2 + '\'' +
