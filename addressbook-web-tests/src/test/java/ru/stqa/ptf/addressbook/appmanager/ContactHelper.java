@@ -147,23 +147,6 @@ public class ContactHelper extends HelperBase {
   }
 
 
-//  public List<ContactData> getContactList() {
-//    List<ContactData> contacts = new ArrayList<ContactData>();
-//    List<WebElement> elements = wd.findElements(By.cssSelector("tr"));
-//    List<WebElement> cells = wd.findElements(By.name("entry"));
-//
-//    for (WebElement cell : cells) {
-//      String lastname = cell.getText();
-//      String firstname = cell.getText();
-//      String address2 = cell.getText();
-//
-//
-//      ContactData contact = new ContactData(id, firstname, lastname, address2);
-//      contacts.add(contact);
-//    }
-//    return contacts;
-//  }
-
   public List<ContactData> getContactList() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> rows = wd.findElements(By.name("entry"));
@@ -171,38 +154,12 @@ public class ContactHelper extends HelperBase {
       List<WebElement> cells = row.findElements(By.cssSelector("td"));
       String lastname = cells.get(1).getText();
       String firstname = cells.get(2).getText();
-      String address2 = cells.get(3).getText();
+      String address = cells.get(3).getText();
       int id = Integer.parseInt(row.findElement(By.cssSelector("input")).getAttribute("id"));
-      ContactData contact = new ContactData(id, lastname, firstname, address2);
+      ContactData contact = new ContactData(id, lastname, firstname, address);
       contacts.add(contact);
     }
     return contacts;
   }
-
-//  public List<ContactData> getContactList() {
-//    List<ContactData> contacts = new ArrayList<ContactData>();
-//    List<WebElement> elements = wd.findElements(By.cssSelector("tr"));
-//    List<WebElement> cells = wd.findElements(By.name("td"));
-////    List<WebElement> cells = wd.findElements(By.cssSelector("tr.entry"));
-//
-//
-//    for (WebElement cell : cells) {
-//      int id = Integer.parseInt(cell.findElement(By.tagName("input")).getAttribute("value"));
-//      String lastname = cell.getText();
-//      String firstname = cell.getText();
-//      String address2 = cell.getText();
-//
-//
-//      ContactData contact = new ContactData(id, firstname, lastname, address2);
-//      contacts.add(contact);
-//    }
-//    return contacts;
-//  }
-//
-//  1) получить строки таблицы
-//2) сделать цикл по строкам
-//3) внутри цикла каждую строку разбить на ячейки
-//4) взять текст из отдельных ячеек и построить объект с информацией о контакте, используя полученные данные
-
 
 }
