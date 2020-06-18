@@ -156,8 +156,8 @@ public class ContactHelper extends HelperBase {
       String firstName = cells.get(2).getText();
       String address = cells.get(3).getText();
       int id = Integer.parseInt(row.findElement(By.cssSelector("input")).getAttribute("id"));
-      ContactData contact = new ContactData(id, firstName,lastName, address);
-      contacts.add(contact);
+      contacts.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
+          .withAddress(address));
     }
     return contacts;
   }

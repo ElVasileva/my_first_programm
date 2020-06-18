@@ -15,7 +15,7 @@ public class ContactCreationTest extends TestBase {
   public void ensurePreconditions() {
     app.goTo().groupPage();
     if (app.group().list().size() == 0) {
-      app.group().create(new GroupData("new_group", null, null));
+      app.group().create(new GroupData().withName("new_group"));
     }
   }
 
@@ -23,7 +23,13 @@ public class ContactCreationTest extends TestBase {
   public void testContactCreation() throws Exception {
     app.goTo().homePage();
     List<ContactData> before = app.contact().list();
-    ContactData contact = new ContactData("Ivan", "Ivanovich", "Ivanov", "Vanja", "NewTitle", "Company", "Saint-Petersburg, Nevsky av., 1", "Ivan", "876876676", "8798788", "9879898", "vanja@mail.ru", "Ivanov@mail.ru", "Iv_iv@mail.ru", "7666766", "new_group", "Prosvetschenija, 1", "777789", "NewPerson");
+    ContactData contact = new ContactData()
+        .withFirstName("Ivan").withMiddleName("Ivanovich").withLastName("Ivanov")
+        .withNickName("Vanja").withTittle("NewTitle").withCompany("Company").withAddress("Saint-Petersburg, Nevsky av., 1")
+        .withHomePhone("876876676").withWorkPhone("8798788").withFax("9879898").withEmail("vanja@mail.ru")
+        .withEmail2("Ivanov@mail.ru").withEmail3("Iv_iv@mail.ru").withHomePage("VanjaPage")
+        .withMobilePhone("7666766").withGroup("new_group").withAddress2("Prosvetschenija, 1").withPhone2("777789")
+        .withNotes("NewPerson");
     app.contact().create(contact, true);
     app.contact().returnToContactPage();
     List<ContactData> after = app.contact().list();
