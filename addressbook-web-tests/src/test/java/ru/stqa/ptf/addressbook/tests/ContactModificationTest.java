@@ -12,7 +12,7 @@ public class ContactModificationTest extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().contacts();
-    if (app.contact().list().size() == 0) {
+    if (app.contact().all().size() == 0) {
       app.contact().create(new ContactData()
           .withFirstName("Ivan").withMiddleName("Ivanovich").withLastName("Ivanov")
           .withNickName("Vanja").withTittle("NewTitle").withCompany("Company").withAddress("Saint-Petersburg, Nevsky av., 1")
@@ -25,10 +25,11 @@ public class ContactModificationTest extends TestBase {
 
   @Test
   public void testContactModification() throws Exception {
-    List<ContactData> before = app.contact().list();
-    int index = before.size() - 1;
-    app.contact().modificate(index);
+    Set<ContactData> before = app.contact().all();
+    ContactData modifiedContact = before.iterator().next();
+    app.contact().modify(modifiedContact);
     ContactData contact = new ContactData()
+        .withId(modifiedContact.getId())
         .withFirstName("Ivan").withMiddleName("Ivanovich").withLastName("Ivanov")
         .withNickName("Vanja").withTittle("NewTitle").withCompany("Company").withAddress("Saint-Petersburg, Nevsky av., 1")
         .withHomePhone("876876676").withWorkPhone("8798788").withFax("9879898").withEmail("vanja@mail.ru")
@@ -38,14 +39,11 @@ public class ContactModificationTest extends TestBase {
     app.contact().fillContactData(contact, false);
     app.contact().submitContactModification();
     app.contact().returnToContactPage();
-    List<ContactData> after = app.contact().list();
+    Set<ContactData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size());
 
-    before.remove(index);
+    before.remove(modifiedContact);
     before.add(contact);
-    Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-    before.sort(byId);
-    after.sort(byId);
     Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
   }
 }

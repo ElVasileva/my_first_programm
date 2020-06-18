@@ -9,7 +9,9 @@ import org.testng.Assert;
 import ru.stqa.ptf.addressbook.model.ContactData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.testng.Assert.assertTrue;
 
@@ -78,35 +80,20 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.xpath(s2)).click();
   }
 
-  private void group(String new_group, String contactGroup, String s) {
-    wd.findElement(By.name(new_group)).click();
-    new Select(wd.findElement(By.name(new_group))).selectByVisibleText(contactGroup);
-    wd.findElement(By.xpath(s)).click();
-  }
-
-
   public void submitContactCreation() {
     click(By.xpath("(//input[@name='submit'])[2]"));
   }
 
-  public void modificate(int index) {
-    wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
+  public void modify(ContactData contact) {
+    wd.findElement(By.xpath("//img[@alt='Edit']")).click();
   }
 
   public void submitContactModification() {
     click(By.name("update"));
   }
 
-  public void select(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
-  }
-
   public void deleteContacts() {
     wd.findElement(By.xpath("//input[@value='Delete']")).click();
-  }
-
-  public void deleteContact() {
-    wd.findElement(By.xpath("(//input[@name='update'])[3]")).click();
   }
 
   public void acceptDeletion() {
@@ -138,17 +125,23 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public boolean isThereAContact() {
-    return isElementPresent(By.xpath("//img[@alt='Edit']"));
+  public void deleteContact(ContactData contact) {
+    selectById(contact.getId());
+    deleteContacts();
+    acceptDeletion();
+    returnToContactPage();
   }
 
-  public int getContactCount() {
-    return wd.findElements(By.xpath("//img[@alt='Edit']")).size();
+  public void select(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
+  private void selectById(int id) {
+    wd.findElement(By.cssSelector("input[id='" + id + "']")).click();
+  }
 
-  public List<ContactData> list() {
-    List<ContactData> contacts = new ArrayList<ContactData>();
+  public Set<ContactData> all() {
+    Set<ContactData> contacts = new HashSet<ContactData>();
     List<WebElement> rows = wd.findElements(By.name("entry"));
     for (WebElement row : rows) {
       List<WebElement> cells = row.findElements(By.cssSelector("td"));
