@@ -1,30 +1,48 @@
 package ru.stqa.ptf.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbook.model.ContactData;
+import ru.stqa.ptf.addressbook.model.Contacts;
 
-import java.util.List;
+import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class ContactDeletionTest extends TestBase {
 
-  @Test
-  public void testContactDeletion() throws Exception {
-    app.getNavigationHelper().gotoContacts();
-    if (!app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createContact(new ContactData("Ivan", "Ivanovich", "Ivanov", "Vanja", "NewTitle", "Company", "Saint-Petersburg, Nevsky av., 1", "Ivan", "876876676", "8798788", "9879898", "vanja@mail.ru", "Ivanov@mail.ru", "Iv_iv@mail.ru", "7666766", "1", "Prosvetschenija, 1", "777789", "NewPerson"), true);
-    }
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().selectContact(before.size() - 1);
-    app.getContactHelper().deleteContacts();
-    app.getContactHelper().acceptDeletion();
-    app.getContactHelper().returnToContactPage();
-    List<ContactData> after = app.getContactHelper().getContactList();
-    Assert.assertEquals(after.size(), before.size() - 1);
-
-    before.remove(before.size() - 1);
-    for (int i = 0; 1 < after.size() - 1; i++) {
-      Assert.assertEquals(before.get(i), after.get(i));
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().contacts();
+    if (app.contact().all().size() == 0) {
+      app.contact().create(new ContactData()
+          .withFirstName("Ivan").withMiddleName("Ivanovich").withLastName("Ivanov")
+          .withNickName("Vanja").withTittle("NewTitle").withCompany("Company").withAddress("Saint-Petersburg, Nevsky av., 1")
+          .withHomePhone("876876676").withWorkPhone("8798788").withFax("9879898").withEmail("vanja@mail.ru")
+          .withEmail2("Ivanov@mail.ru").withEmail3("Iv_iv@mail.ru").withHomePage("VanjaPage")
+          .withMobilePhone("7666766").withGroup("new_group").withAddress2("Prosvetschenija, 1").withPhone2("777789")
+          .withNotes("NewPerson"), true);
     }
   }
+
+  @Test
+  public void testContactDeletion() throws Exception {
+    Contacts before = app.contact().all();
+    ContactData deletedContact = before.iterator().next();
+    app.contact().deleteContact(deletedContact);
+    Contacts after = app.contact().all();
+
+    assertEquals(after.size(), before.size() - 1);
+
+    assertThat(after, equalTo(before.without(deletedContact)));
+
+//    assertThat(after.size(), equalTo(before.size() - 1));
+//    before.remove(deletedContact);
+//    Assert.assertEquals(before, after);
+  }
+
+
 }

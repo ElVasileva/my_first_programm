@@ -1,79 +1,131 @@
 package ru.stqa.ptf.addressbook.model;
 
 public class ContactData {
-    private int id;
-    private final String firstName;
-    private final String middleName;
-    private final String lastName;
-    private final String nickName;
-    private final String tittle;
-    private final String company;
-    private final String address;
-    private final String homePhone;
-    private final String mobilePhone;
-    private final String workPhone;
-    private final String fax;
-    private final String email;
-    private final String email2;
-    private final String email3;
-    private final String homePage;
-    private final String group;
-    private final String address2;
-    private final String phone2;
-    private final String notes;
+    private int id = Integer.MAX_VALUE;
+    private String firstName;
+    private String middleName;
+    private String lastName;
+    private String nickName;
+    private String tittle;
+    private String company;
+    private String address;
+    private String homePhone;
+    private String mobilePhone;
+    private String workPhone;
+    private String fax;
+    private String email;
+    private String email2;
+    private String email3;
+    private String homePage;
+    private String group;
+    private String address2;
+    private String phone2;
+    private String notes;
 
 
-    public ContactData(String firstName, String middleName, String lastName, String nickName, String tittle, String company, String address, String homePage, String mobilePhone, String workPhone, String fax, String email, String email2, String email3, String homePhone, String group, String address2, String phone2, String notes) {
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.nickName = nickName;
-        this.tittle = tittle;
-        this.company = company;
-        this.address = address;
-        this.homePhone = homePhone;
-        this.mobilePhone = mobilePhone;
-        this.workPhone = workPhone;
-        this.fax = fax;
-        this.email = email;
-        this.email2 = email2;
-        this.email3 = email3;
-        this.homePage = homePage;
-        this.group = group;
-        this.address2 = address2;
-        this.phone2 = phone2;
-        this.notes = notes;
+    public ContactData withId(int id) {
+        this.id = id;
+        return  this;
     }
 
-    public ContactData(int id, String firstName, String lastName, String address) {
-        this.id = Integer.MAX_VALUE;
+    public ContactData withFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
+    }
+
+    public ContactData withMiddleName(String middleName) {
+        this.middleName = middleName;
+        return this;
+    }
+
+    public ContactData withLastName(String lastName) {
         this.lastName = lastName;
+        return this;
+    }
+
+    public ContactData withNickName(String nickName) {
+        this.nickName = nickName;
+        return this;
+    }
+
+    public ContactData withTittle(String tittle) {
+        this.tittle = tittle;
+        return this;
+
+    }
+
+    public ContactData withCompany(String company) {
+        this.company = company;
+        return this;
+    }
+
+    public ContactData withAddress(String address) {
         this.address = address;
-        this.middleName = null;
-        this.nickName = null;
-        this.tittle = null;
-        this.company = null;
-        this.address2 = null;
-        this.homePhone = null;
-        this.mobilePhone = null;
-        this.workPhone = null;
-        this.fax = null;
-        this.email = null;
-        this.email2 = null;
-        this.email3 = null;
-        this.homePage = null;
-        this.group = null;
-        this.phone2 = null;
-        this.notes = null;
+        return this;
+    }
+
+    public ContactData withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+        return this;
+    }
+
+    public ContactData withMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+        return this;
+    }
+
+    public ContactData withWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+        return this;
+    }
+
+    public ContactData withFax(String fax) {
+        this.fax = fax;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactData withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public ContactData withEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
+
+    public ContactData withHomePage(String homePage) {
+        this.homePage = homePage;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
+        this.group = group;
+        return this;
+    }
+
+    public ContactData withAddress2(String address2) {
+        this.address2 = address2;
+        return this;
+    }
+
+    public ContactData withPhone2(String phone2) {
+        this.phone2 = phone2;
+        return this;
+    }
+
+    public ContactData withNotes(String notes) {
+        this.notes = notes;
+        return this;
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -167,14 +219,16 @@ public class ContactData {
 
         ContactData that = (ContactData) o;
 
+        if (id != that.id) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
-        return address2 != null ? address.equals(that.address) : that.address == null;
+        return address != null ? address.equals(that.address) : that.address == null;
     }
 
     @Override
     public int hashCode() {
-        int result = firstName != null ? firstName.hashCode() : 0;
+        int result = id;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;
