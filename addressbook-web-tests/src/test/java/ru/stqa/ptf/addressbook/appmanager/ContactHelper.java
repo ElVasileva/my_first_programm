@@ -7,11 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.ptf.addressbook.model.ContactData;
+import ru.stqa.ptf.addressbook.model.Contacts;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.testng.Assert.assertTrue;
 
@@ -132,16 +130,20 @@ public class ContactHelper extends HelperBase {
     returnToContactPage();
   }
 
-  public void select(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
+
+  public void modifyContact(ContactData contact) {
+    modify(contact);
+    fillContactData(contact, false);
+    submitContactModification();
+    returnToContactPage();
   }
 
   private void selectById(int id) {
     wd.findElement(By.cssSelector("input[id='" + id + "']")).click();
   }
 
-  public Set<ContactData> all() {
-    Set<ContactData> contacts = new HashSet<ContactData>();
+  public Contacts all() {
+    Contacts contacts = new Contacts();
     List<WebElement> rows = wd.findElements(By.name("entry"));
     for (WebElement row : rows) {
       List<WebElement> cells = row.findElements(By.cssSelector("td"));
