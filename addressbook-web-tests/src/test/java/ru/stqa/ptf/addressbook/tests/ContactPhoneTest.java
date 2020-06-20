@@ -1,15 +1,15 @@
 package ru.stqa.ptf.addressbook.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbook.model.ContactData;
-import ru.stqa.ptf.addressbook.model.Contacts;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 
-public class ContactDeletionByModificationTest extends TestBase {
+public class ContactPhoneTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -26,15 +26,18 @@ public class ContactDeletionByModificationTest extends TestBase {
   }
 
   @Test
-  public void testContactDeletionByModification() throws Exception {
-    Contacts before = app.contact().all();
-    ContactData deletedContact = before.iterator().next();
-    app.contact().deleteContact(deletedContact);
-    assertThat(app.contact().count(), equalTo(before.size() - 1));
-    Contacts after = app.contact().all();
+  public void testContactPhones() {
+    app.goTo().homePage();
+    ContactData contact = app.contact().all().iterator().next();
+    ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
-    assertEquals(after.size(), before.size() - 1);
-    assertThat(after, equalTo(before.without(deletedContact)));
+    assertThat(contact.getHomePhone(), equalTo(cleaned(contactInfoFromEditForm.getHomePhone())));
+    assertThat(contact.getMobilePhone(), equalTo(cleaned(contactInfoFromEditForm.getMobilePhone())));
+    assertThat(contact.getWorkPhone(), equalTo(cleaned(contactInfoFromEditForm.getWorkPhone())));
 
+  }
+
+  public String cleaned (String phone) {
+    return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
   }
 }

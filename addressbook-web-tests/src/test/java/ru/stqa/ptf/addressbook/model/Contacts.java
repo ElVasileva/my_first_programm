@@ -9,7 +9,7 @@ public class Contacts extends ForwardingSet<ContactData> {
 
   private Set<ContactData> delegate;
 
-  public Contacts (Contacts contacts) {
+  public Contacts(Contacts contacts) {
     this.delegate = new HashSet<ContactData>(contacts.delegate);
   }
 
@@ -19,7 +19,7 @@ public class Contacts extends ForwardingSet<ContactData> {
 
   @Override
   protected Set<ContactData> delegate() {
-    return null;
+    return delegate;
   }
 
   public Contacts withAdded (ContactData contact) {
