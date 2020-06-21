@@ -8,8 +8,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.ptf.addressbook.model.ContactData;
 import ru.stqa.ptf.addressbook.model.Contacts;
-import ru.stqa.ptf.addressbook.model.GroupData;
-import ru.stqa.ptf.addressbook.model.Groups;
 
 import java.util.List;
 
@@ -170,11 +168,10 @@ public class ContactHelper extends HelperBase {
       String lastName = cells.get(1).getText();
       String firstName = cells.get(2).getText();
       String address = cells.get(3).getText();
-      String[] phones = cells.get(5).getText().split("/n");
+      String allPhones = cells.get(5).getText();
       int id = Integer.parseInt(row.findElement(By.cssSelector("input")).getAttribute("id"));
       contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
-          .withAddress(address).withHomePhone(phones[0]).withMobilePhone(phones[1])
-          .withWorkPhone(phones[2]));
+          .withAddress(address).withAllPhones(allPhones));
     }
     return new Contacts(contactCache);
   }
@@ -186,16 +183,17 @@ public class ContactHelper extends HelperBase {
     String home = wd.findElement(By.name("home")).getAttribute("value");
     String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
     String work = wd.findElement(By.name("work")).getAttribute("value");
+    String phone2 = wd.findElement(By.name("phone2")).getAttribute("value");
     wd.navigate().back();
     return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
-        .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
+        .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withPhone2(phone2);
 
 
   }
 
   private void initContactModificationById(int id) {
     WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value= '%s']", id)));
-    WebElement row = checkbox.findElement(By.xpath("./../../"));
+    WebElement row = checkbox.findElement(By.xpath("./../.."));
     List<WebElement> cells = row.findElements(By.tagName("td"));
     cells.get(7).findElement(By.tagName("a")).click();
   }
