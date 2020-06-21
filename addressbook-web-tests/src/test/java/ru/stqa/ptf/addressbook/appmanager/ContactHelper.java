@@ -119,6 +119,7 @@ public class ContactHelper extends HelperBase {
     initNewContact();
     fillContactData(contact, true);
     submitContactCreation();
+    contactCache = null;
     returnToContactPage();
 
   }
@@ -127,6 +128,7 @@ public class ContactHelper extends HelperBase {
     selectById(contact.getId());
     deleteContacts();
     acceptDeletion();
+    contactCache = null;
     returnToContactPage();
   }
 
@@ -135,6 +137,7 @@ public class ContactHelper extends HelperBase {
     modify(contact);
     fillContactData(contact, false);
     submitContactModification();
+    contactCache = null;
     returnToContactPage();
   }
 
@@ -142,6 +145,7 @@ public class ContactHelper extends HelperBase {
     selectById(contact.getId());
     fillContactData(contact, false);
     submitContactModification();
+    contactCache = null;
     returnToContactPage();
   }
 
