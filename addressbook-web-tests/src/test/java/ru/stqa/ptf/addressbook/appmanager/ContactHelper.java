@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.ptf.addressbook.model.ContactData;
 import ru.stqa.ptf.addressbook.model.Contacts;
+import ru.stqa.ptf.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -83,9 +84,9 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("(//input[@name='submit'])[2]"));
   }
 
-  public void modify(ContactData contact) {
-    wd.findElement(By.cssSelector("img[alt=\"Edit\"]")).click();
-  }
+//  public void modify(ContactData contact) {
+//    wd.findElement(By.cssSelector("img[alt=\"Edit\"]")).click();
+//  }
 
   public void submitContactModification() {
     click(By.name("update"));
@@ -133,9 +134,9 @@ public class ContactHelper extends HelperBase {
     returnToContactPage();
   }
 
-
   public void modifyContact(ContactData contact) {
-    modify(contact);
+    selectById(contact.getId());
+    initContactModificationById(contact.getId());
     fillContactData(contact, false);
     submitContactModification();
     contactCache = null;
