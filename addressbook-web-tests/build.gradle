@@ -11,4 +11,5 @@ dependencies {
     implementation 'com.applitools:eyes-selenium-java4:4.12.0'
     implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
     implementation 'com.beust:jcommander:1.78'
+    implementation 'com.thoughtworks.xstream:xstream:1.4.12-java7'
 }
