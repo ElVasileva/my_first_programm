@@ -92,3 +92,4 @@ public class ContactCreationTest extends TestBase {
     System.out.println(photo.exists());
   }
 }
+
