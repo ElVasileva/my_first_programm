@@ -3,53 +3,97 @@ package ru.stqa.ptf.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
+
+@Entity
+@Table(name = "addressbook")
 
 @XStreamAlias("contact")
 public class ContactData {
     @XStreamOmitField
+    @Id
+    @Column(name = "id")
     private int id = Integer.MAX_VALUE;
     @Expose
+    @Column(name = "firstname")
     private String firstName;
     @Expose
+    @Column(name = "middlename")
     private String middleName;
     @Expose
+    @Column(name = "lastname")
     private String lastName;
     @Expose
+    @Column(name = "nickname")
     private String nickName;
     @Expose
+    @Column(name = "title")
     private String tittle;
     @Expose
+    @Column(name = "company")
     private String company;
     @Expose
+    @Column(name = "address")
+    @Type(type = "text")
     private String address;
     @Expose
+    @Column(name = "home")
+    @Type(type = "text")
     private String homePhone;
     @Expose
+    @Type(type = "text")
+    @Column(name = "mobile")
     private String mobilePhone;
     @Expose
+    @Type(type = "text")
+    @Column(name = "work")
     private String workPhone;
     @Expose
+    @Column(name = "fax")
+    @Type(type = "text")
     private String fax;
     @Expose
+    @Column(name = "email")
+    @Type(type = "text")
     private String email;
     @Expose
+    @Column(name = "email2")
+    @Type(type = "text")
     private String email2;
     @Expose
+    @Column(name = "email3")
+    @Type(type = "text")
     private String email3;
     @Expose
+    @Column(name = "homepage")
+    @Type(type = "text")
     private String homePage;
+
+    @Transient
+    @Column(name = "id")
     private String group;
     @Expose
+    @Column(name = "address2")
+    @Type(type = "text")
     private String address2;
     @Expose
+    @Column(name = "phone2")
+    @Type(type = "text")
     private String phone2;
     @Expose
+    @Column(name = "notes")
+    @Type(type = "text")
     private String notes;
+    @Transient
     private String allPhones;
+    @Transient
     private String allEmails;
-    private File photo;
+    @Column(name = "photo")
+    @Type(type = "text")
+    private String photo;
 
     public ContactData withId(int id) {
         this.id = id;
@@ -164,7 +208,7 @@ public class ContactData {
     }
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
@@ -255,7 +299,7 @@ public class ContactData {
     }
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     @Override
