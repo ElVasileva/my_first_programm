@@ -37,6 +37,7 @@ public class ContactData {
     private String company;
     @Expose
     @Column(name = "address")
+    @Type(type = "text")
     private String address;
     @Expose
     @Column(name = "home")
@@ -52,18 +53,23 @@ public class ContactData {
     private String workPhone;
     @Expose
     @Column(name = "fax")
+    @Type(type = "text")
     private String fax;
     @Expose
-    @Column(name = "email1")
+    @Column(name = "email")
+    @Type(type = "text")
     private String email;
     @Expose
     @Column(name = "email2")
+    @Type(type = "text")
     private String email2;
     @Expose
     @Column(name = "email3")
+    @Type(type = "text")
     private String email3;
     @Expose
     @Column(name = "homepage")
+    @Type(type = "text")
     private String homePage;
 
     @Transient
@@ -71,12 +77,15 @@ public class ContactData {
     private String group;
     @Expose
     @Column(name = "address2")
+    @Type(type = "text")
     private String address2;
     @Expose
     @Column(name = "phone2")
+    @Type(type = "text")
     private String phone2;
     @Expose
     @Column(name = "notes")
+    @Type(type = "text")
     private String notes;
     @Transient
     private String allPhones;
