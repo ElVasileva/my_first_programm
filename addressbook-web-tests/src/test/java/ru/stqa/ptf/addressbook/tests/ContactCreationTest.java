@@ -69,13 +69,16 @@ public class ContactCreationTest extends TestBase {
     }
   }
 
-  @Test(dataProvider = "validContactsFromXml")
-  public void testContactCreation(ContactData contact) throws Exception {
+  @Test
+      (dataProvider = "validContactsFromXml")
+//  public void testContactCreation(ContactData contact) throws Exception
+  public void testContactCreation(ContactData contact) throws Exception{
     Contacts before = app.db().contacts();
     File photo = new File("src/test/resources/Screenshot_9.png");
     app.goTo().homePage();
     app.contact().create(contact.withGroup("test 1").withPhoto(photo), true);
     app.contact().returnToContactPage();
+//    assertThat(app.db().contacts(), equalTo(before.size() + 1));
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
     assertThat(after.size(), equalTo(before.size() + 1));
