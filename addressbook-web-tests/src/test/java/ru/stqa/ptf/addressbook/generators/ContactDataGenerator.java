@@ -78,7 +78,7 @@ public class ContactDataGenerator {
             contact.getLastName(), contact.getNickName(), contact.getTittle(), contact.getCompany(),
             contact.getAddress(), contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(),
             contact.getFax(), contact.getEmail(), contact.getEmail2(), contact.getEmail3(),
-            contact.getHomePage(), contact.getGroup(), contact.getAddress2(), contact.getPhone2(),
+            contact.getHomePage(), contact.getGroups().iterator().next(), contact.getAddress2(), contact.getPhone2(),
             contact.getNotes()));
       }
     }

@@ -1,20 +1,27 @@
 package ru.stqa.ptf.addressbook.model;
 
 import com.google.common.collect.ForwardingSet;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Contacts extends ForwardingSet<ContactData> {
 
   private Set<ContactData> delegate;
 
+  private SessionFactory sessionFactory;
+
   public Contacts(Contacts contacts) {
     this.delegate = new HashSet<ContactData>(contacts.delegate);
   }
 
-  public Contacts () {
+  public Contacts() {
     this.delegate = new HashSet<ContactData>();
   }
 
@@ -27,15 +34,18 @@ public class Contacts extends ForwardingSet<ContactData> {
     return delegate;
   }
 
-  public Contacts withAdded (ContactData contact) {
+  public Contacts withAdded(ContactData contact) {
     Contacts contacts = new Contacts(this);
     contacts.add(contact);
     return contacts;
   }
 
-  public Contacts without (ContactData contact) {
+  public Contacts without(ContactData contact) {
     Contacts contacts = new Contacts(this);
     contacts.remove(contact);
     return contacts;
   }
+
+
+
 }

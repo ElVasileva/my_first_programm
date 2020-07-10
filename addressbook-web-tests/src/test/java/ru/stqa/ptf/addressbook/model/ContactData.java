@@ -3,10 +3,13 @@ package ru.stqa.ptf.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.SessionFactory;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -72,9 +75,9 @@ public class ContactData {
     @Type(type = "text")
     private String homePage;
 
-    @Transient
-    @Column(name = "id")
-    private String group;
+    //    @Transient
+//    @Column(name = "id")
+//    private String group;
     @Expose
     @Column(name = "address2")
     @Type(type = "text")
@@ -96,9 +99,14 @@ public class ContactData {
     @Type(type = "text")
     private String photo;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups",
+        joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
+
     public ContactData withId(int id) {
         this.id = id;
-        return  this;
+        return this;
     }
 
     public ContactData withFirstName(String firstName) {
@@ -177,10 +185,10 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withGroup(String group) {
-        this.group = group;
-        return this;
-    }
+//    public ContactData withGroup(String group) {
+//        this.group = group;
+//        return this;
+//    }
 
     public ContactData withAddress2(String address2) {
         this.address2 = address2;
@@ -277,7 +285,11 @@ public class ContactData {
         return homePage;
     }
 
-    public String getGroup() { return group; }
+    public Groups getGroups() {
+        return new Groups(groups);
+    }
+
+//    public String getGroup() { return group; }
 
     public String getAddress2() {
         return address2;
@@ -318,6 +330,7 @@ public class ContactData {
 
         ContactData that = (ContactData) o;
 
+        if (id != that.id) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
         return address != null ? address.equals(that.address) : that.address == null;
@@ -325,7 +338,8 @@ public class ContactData {
 
     @Override
     public int hashCode() {
-        int result = firstName != null ? firstName.hashCode() : 0;
+        int result = id;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;
@@ -340,4 +354,52 @@ public class ContactData {
             '}';
     }
 
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
+    }
+
+    public void getGroupsCollection() {
+
+//        Session session = sessionFactory.openSession();
+//        session.beginTransaction();
+//        List<ContactData> result = session.createQuery("from ContactData").list();
+//        List<ContactData> result = session.createQuery("from ContactData").list();
+
+//        for (ContactData contact : result) {
+//      System.out.println(contact);
+//      System.out.println(contact.getGroups());
+//    }
+//    session.getTransaction().commit();
+//    session.close();
+//        return null;
+//    }
+
+//        List<Groups> groups = findElements(By.name("entry"));
+//        for (Groups row : rows) {
+//            List<WebElement> cells = row.findElements(By.cssSelector("td"));
+//            String lastName = cells.get(1).getText();
+//            String firstName = cells.get(2).getText();
+//            String address = cells.get(3).getText();
+//            String allEmails = cells.get(4).getText();
+//            String allPhones = cells.get(5).getText();
+//            int id = Integer.parseInt(row.findElement(By.cssSelector("input")).getAttribute("id"));
+//            contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
+//                .withAddress(address).withAllPhones(allPhones).withAllEmails(allEmails));
+//        }
+//        return new Contacts(contactCache);
+//    }
+        //  contactGroups = new Group() {
+//    Session session = sessionFactory.openSession();
+//    session.beginTransaction();
+//    List<ContactData> result = session.createQuery("from ContactData").list();
+//    for (ContactData contact : result) {
+////      System.out.println(contact);
+////      System.out.println(contact.getGroups());
+//    }
+//    session.getTransaction().commit();
+//    session.close();
+//  }
+
+    }
 }
