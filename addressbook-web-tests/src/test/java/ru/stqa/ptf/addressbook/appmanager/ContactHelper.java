@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.ptf.addressbook.model.ContactData;
 import ru.stqa.ptf.addressbook.model.Contacts;
+import ru.stqa.ptf.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -49,7 +50,10 @@ public class ContactHelper extends HelperBase {
     attach(By.name("photo"), contactData.getPhoto());
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+      }
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -150,8 +154,13 @@ public class ContactHelper extends HelperBase {
     returnToContactPage();
   }
 
-  private void selectById(int id) {
+
+  public void selectById(int id) {
     wd.findElement(By.cssSelector("input[id='" + id + "']")).click();
+  }
+
+  public void selectContact(ContactData contact) {
+    selectById(contact.getId());
   }
 
   public int count() {
@@ -208,4 +217,34 @@ public class ContactHelper extends HelperBase {
     List<WebElement> cells = row.findElements(By.tagName("td"));
     cells.get(7).findElement(By.tagName("a")).click();
   }
+
+  public void addContactToGroup(ContactData contact, GroupData group) {
+    selectById(contact.getId());
+    selectById(group.getId());
+    wd.findElement(By.name("add")).click();
+    returnGroupToAdd();
+  }
+
+  public void removeContactFromGroup(ContactData contact, GroupData group) {
+    goToGroupContactsPage(group.getId());
+    selectById(contact.getId());
+    wd.findElement(By.name("remove")).click();
+    returnGroupToAdd();
+  }
+
+
+  public void returnGroupToAdd() {
+    if (isElementPresent(By.id("maintable"))) {
+      return;
+    }
+    click(By.xpath("//a[contains(text(),\"group page\")]"));
+  }
+
+  public void goToGroupContactsPage(int groupid) {
+    if (isElementPresent(By.id("maintable")) && isElementPresent(By.name("remove"))) {
+      return;
+    }
+    new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(groupid));
+  }
+
 }

@@ -76,7 +76,7 @@ public class ContactCreationTest extends TestBase {
     Contacts before = app.db().contacts();
     File photo = new File("src/test/resources/Screenshot_9.png");
     app.goTo().homePage();
-    app.contact().create(contact.withGroup("test 1").withPhoto(photo), true);
+//    app.contact().create(contact.withGroup("test 1").withPhoto(photo), true);
     app.contact().returnToContactPage();
 //    assertThat(app.db().contacts(), equalTo(before.size() + 1));
     assertThat(app.contact().count(), equalTo(before.size() + 1));

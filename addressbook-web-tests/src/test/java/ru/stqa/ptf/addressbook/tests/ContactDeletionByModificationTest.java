@@ -4,6 +4,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbook.model.ContactData;
 import ru.stqa.ptf.addressbook.model.Contacts;
+import ru.stqa.ptf.addressbook.model.GroupData;
+import ru.stqa.ptf.addressbook.model.Groups;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -12,8 +14,17 @@ import static org.testng.Assert.assertEquals;
 public class ContactDeletionByModificationTest extends TestBase {
 
   @BeforeMethod
-  public void ensurePreconditions() {
+  public void ensurePreconditionsGroup() {
+    if (app.db().groups().size() == 0) {
+      app.goTo().groupPage();
+      app.group().create(new GroupData().withName("test1"));
+    }
+  }
+
+  @BeforeMethod
+  public void ensurePreconditionsContact() {
 //    app.goTo().contacts();
+    Groups groups = app.db().groups();
     if (app.db().contacts().size() == 0) {
       app.goTo().contacts();
       app.contact().create(new ContactData()
@@ -21,7 +32,7 @@ public class ContactDeletionByModificationTest extends TestBase {
           .withNickName("Vanja").withTittle("NewTitle").withCompany("Company").withAddress("Saint-Petersburg, Nevsky av., 1")
           .withHomePhone("876876676").withWorkPhone("8798788").withFax("9879898").withEmail("vanja@mail.ru")
           .withEmail2("Ivanov@mail.ru").withEmail3("Iv_iv@mail.ru").withHomePage("VanjaPage")
-          .withMobilePhone("7666766").withGroup("new_group").withAddress2("Prosvetschenija, 1").withPhone2("777789")
+          .withMobilePhone("7666766").inGroup(groups.iterator().next()).withAddress2("Prosvetschenija, 1").withPhone2("777789")
           .withNotes("NewPerson"), true);
     }
   }
