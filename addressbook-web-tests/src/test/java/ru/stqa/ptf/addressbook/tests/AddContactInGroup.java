@@ -40,34 +40,49 @@ public class AddContactInGroup extends TestBase {
           .withNotes("NewPerson"), true);
     }
 
-//    if (app.db().groups().stream().filter((g -> !g.getContacts.isEmpty()).collect(toSet()).isEmpty()) {
-//      GroupData groupTemp = app.db().groups().iterator().next();
-//      ContactData contactTemp = app.db().contacts().iterator().next();
-//      app.contact().addToGroup(contactTemp, groupTemp);
-//    }
   }
 
   @Test
   public void testAddContactInGroup() throws Exception {
-    Contacts contacts = app.db().contacts();
     Groups groups = app.db().groups();
-    Groups groupsBefore = app.db().contacts().getGroups();
-    contacts.getGroups();
     ContactData selectedContact = app.db().contacts().iterator().next();
     GroupData selectedGroup = app.db().groups().iterator().next();
-    if (selectedContact.getGroups().stream().collect(selectedGroup)) {
+    Groups groupsBefore = selectedContact.getGroups();
+
+    if (selectedContact.getGroups().contains(selectedGroup)) {
       app.goTo().groupPage();
       app.group().create(new GroupData().withName("test1"));
     }
+
+    app.goTo().contacts();
+    app.contact().addContactToGroup(selectedContact, selectedGroup);
+    Groups groupsAfter = selectedContact.getGroups();
+    assertEquals(groupsAfter.size(), groupsBefore.size() + 1);
+
+
+//    Groups groupsBefore = selectedContact.getGroupsCollection();
+//    selectedContact.getGroupsCollection();
+
+
+//    Groups groupsBefore = app.db().contacts().getGroups();
+//    contacts.getGroups();
+
+//    if (selectedContact.getGroups().stream().collect(selectedGroup)) {
+//      app.goTo().groupPage();
+//      app.group().create(new GroupData().withName("test1"));
+//    }
 //    if (contacts.getGroups().stream().collect(selectedGroup)) {
 //      app.goTo().groupPage();
 //      app.group().create(new GroupData().withName("test1"));
 //    }
 
-    app.contact().selectContact(selectedContact);
-    app.contact().addContactToGroup(selectedContact, selectedGroup);
-    Groups groupsAfter = app.db().contacts().getGroups();
-    assertEquals(groupsAfter.size(), groupsBefore.size() + 1);
+
+//    app.contact().selectContact(selectedContact);
+//    app.contact().addContactToGroup(selectedContact, selectedGroup);
+
+
+//    Groups groupsAfter = app.db().contacts().getGroups();
+//    assertEquals(groupsAfter.size(), groupsBefore.size() + 1);
 
 
 

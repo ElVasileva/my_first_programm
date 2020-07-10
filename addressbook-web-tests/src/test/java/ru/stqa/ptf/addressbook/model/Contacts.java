@@ -46,16 +46,6 @@ public class Contacts extends ForwardingSet<ContactData> {
     return contacts;
   }
 
-//  contactGroups = new Group() {
-//    Session session = sessionFactory.openSession();
-//    session.beginTransaction();
-//    List<ContactData> result = session.createQuery("from ContactData").list();
-//    for (ContactData contact : result) {
-////      System.out.println(contact);
-////      System.out.println(contact.getGroups());
-//    }
-//    session.getTransaction().commit();
-//    session.close();
-//  }
+
 
 }

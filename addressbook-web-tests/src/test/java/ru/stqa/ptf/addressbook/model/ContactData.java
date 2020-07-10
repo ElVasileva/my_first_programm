@@ -3,6 +3,7 @@ package ru.stqa.ptf.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.SessionFactory;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -74,7 +75,7 @@ public class ContactData {
     @Type(type = "text")
     private String homePage;
 
-//    @Transient
+    //    @Transient
 //    @Column(name = "id")
 //    private String group;
     @Expose
@@ -105,7 +106,7 @@ public class ContactData {
 
     public ContactData withId(int id) {
         this.id = id;
-        return  this;
+        return this;
     }
 
     public ContactData withFirstName(String firstName) {
@@ -356,5 +357,49 @@ public class ContactData {
     public ContactData inGroup(GroupData group) {
         groups.add(group);
         return this;
+    }
+
+    public void getGroupsCollection() {
+
+//        Session session = sessionFactory.openSession();
+//        session.beginTransaction();
+//        List<ContactData> result = session.createQuery("from ContactData").list();
+//        List<ContactData> result = session.createQuery("from ContactData").list();
+
+//        for (ContactData contact : result) {
+//      System.out.println(contact);
+//      System.out.println(contact.getGroups());
+//    }
+//    session.getTransaction().commit();
+//    session.close();
+//        return null;
+//    }
+
+//        List<Groups> groups = findElements(By.name("entry"));
+//        for (Groups row : rows) {
+//            List<WebElement> cells = row.findElements(By.cssSelector("td"));
+//            String lastName = cells.get(1).getText();
+//            String firstName = cells.get(2).getText();
+//            String address = cells.get(3).getText();
+//            String allEmails = cells.get(4).getText();
+//            String allPhones = cells.get(5).getText();
+//            int id = Integer.parseInt(row.findElement(By.cssSelector("input")).getAttribute("id"));
+//            contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
+//                .withAddress(address).withAllPhones(allPhones).withAllEmails(allEmails));
+//        }
+//        return new Contacts(contactCache);
+//    }
+        //  contactGroups = new Group() {
+//    Session session = sessionFactory.openSession();
+//    session.beginTransaction();
+//    List<ContactData> result = session.createQuery("from ContactData").list();
+//    for (ContactData contact : result) {
+////      System.out.println(contact);
+////      System.out.println(contact.getGroups());
+//    }
+//    session.getTransaction().commit();
+//    session.close();
+//  }
+
     }
 }

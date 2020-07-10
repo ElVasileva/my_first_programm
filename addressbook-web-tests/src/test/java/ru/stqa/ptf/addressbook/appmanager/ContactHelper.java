@@ -221,7 +221,7 @@ public class ContactHelper extends HelperBase {
   public void addContactToGroup(ContactData contact, GroupData group) {
     selectById(contact.getId());
     selectById(group.getId());
-    wd.findElement(By.name("add")).click();
+    wd.findElement(By.name("add to")).click();
     returnGroupToAdd();
   }
 
@@ -239,6 +239,16 @@ public class ContactHelper extends HelperBase {
     }
     click(By.xpath("//a[contains(text(),\"group page\")]"));
   }
+
+  public void goToContactGroup() {
+    click(By.xpath("//div[@id='content']/div/i/a"));
+  }
+
+  private void selectGroupById(int groupid) {
+    new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(groupid));
+
+  }
+
 
   public void goToGroupContactsPage(int groupid) {
     if (isElementPresent(By.id("maintable")) && isElementPresent(By.name("remove"))) {
