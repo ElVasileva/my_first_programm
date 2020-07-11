@@ -10,6 +10,7 @@ dependencies {
     implementation 'org.testng:testng:6.14.3'
     implementation 'com.applitools:eyes-selenium-java4:4.12.0'
     implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
+    implementation 'commons-net:commons-net:20030805.205232'
 }
 
 test {
