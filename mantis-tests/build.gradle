@@ -11,6 +11,9 @@ dependencies {
     implementation 'com.applitools:eyes-selenium-java4:4.12.0'
     implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
     implementation 'commons-net:commons-net:20030805.205232'
+    implementation 'org.subethamail:subethasmtp:3.1.7'
+    implementation 'ru.lanwen.verbalregex:java-verbal-expressions:1.6'
+    implementation 'ch.qos.logback:logback-classic:1.1.5'
 }
 
 test {
