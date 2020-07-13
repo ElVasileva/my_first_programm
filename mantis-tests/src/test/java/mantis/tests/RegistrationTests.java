@@ -1,5 +1,6 @@
 package mantis.tests;
 
+import mantis.appmanager.FtpHelper;
 import mantis.model.MailMessage;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -24,7 +25,7 @@ public class RegistrationTests extends TestBase {
   @Test
   public void testRegistration() throws IOException, MessagingException {
     long now = System.currentTimeMillis();
-    String user = format("user%s" + now);
+    String user = format("user%s", now);
     String password = "password";
     String email = format("user%s@localhost@localdomain", now);
     app.james().createUser(user, password);

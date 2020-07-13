@@ -16,8 +16,7 @@ public class FtpHelper {
     ftp = new FTPClient();
   }
 
-  public void upload (File file, String target, String backup) throws IOException {
-    ftp.connect(app.getProperty("ftp.host"));
+  public void upload (File file, String target, String backup) throws IOException { ftp.connect(app.getProperty("ftp.host"));
     ftp.login(app.getProperty("ftp.login"), app.getProperty("ftp.password"));
     ftp.deleteFile(backup);
     ftp.rename(target, backup);
