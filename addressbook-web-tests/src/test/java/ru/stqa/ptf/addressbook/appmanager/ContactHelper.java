@@ -156,7 +156,7 @@ public class ContactHelper extends HelperBase {
 
 
   public void selectById(int id) {
-    wd.findElement(By.cssSelector("input[id='" + id + "']")).click();
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
   public void selectContact(ContactData contact) {
@@ -220,8 +220,8 @@ public class ContactHelper extends HelperBase {
 
   public void addContactToGroup(ContactData contact, GroupData group) {
     selectById(contact.getId());
-    selectById(group.getId());
-    wd.findElement(By.name("add to")).click();
+    selectGroupById(group.getId());
+    wd.findElement(By.name("add")).click();
     returnGroupToAdd();
   }
 
