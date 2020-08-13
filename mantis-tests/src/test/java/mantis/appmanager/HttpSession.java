@@ -25,16 +25,16 @@ public class HttpSession {
   }
 
   public boolean login(String username, String password) throws IOException {
-    HttpPost post = new HttpPost(app.getProperty("web.baseUrl") + "/login.php");
+    HttpPost post = new HttpPost(app.getProperty("web.baseUrl") + "/login.php"); // post request created
     List<NameValuePair> params = new ArrayList<NameValuePair>();
     params.add(new BasicNameValuePair("username", username));
     params.add(new BasicNameValuePair("password", password));
     params.add(new BasicNameValuePair("secure_session", "on"));
-    params.add(new BasicNameValuePair("retutn", "index.php"));
-    post.setEntity(new UrlEncodedFormEntity(params));
-    CloseableHttpResponse response = httpClient.execute(post);
-    String body = geTextFrom(response);
-    return body.contains(String.format("<span class=\"italic\">%s</span", username));
+    params.add(new BasicNameValuePair("return", "index.php"));
+    post.setEntity(new UrlEncodedFormEntity(params)); //set parameters are packed and placed in a request
+    CloseableHttpResponse response = httpClient.execute(post); //request is sent
+    String body_login = geTextFrom(response);
+    return body_login.contains(String.format("<a href=\"/mantisbt-2.24.1/account_page.php\">%s</a>", username));
   }
 
   private String geTextFrom(CloseableHttpResponse response) throws IOException {

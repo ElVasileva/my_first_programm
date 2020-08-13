@@ -1,6 +1,7 @@
 package mantis.tests;
 
 import mantis.model.MailMessage;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
 
@@ -11,14 +12,24 @@ import java.util.List;
 import static java.lang.String.format;
 import static org.testng.Assert.assertTrue;
 
-public class ResetPassTests {
+public class ResetPassTests extends TestBase{
+
+    @Ignore
     @Test
-    public void testRegistration() throws IOException, MessagingException {
+    public void testRegistration() throws IOException, MessagingException, InterruptedException {
+
+        app.registration().login("administrator", "root");
+        String password = "passwordNew";
+        app.getDriver().get(app.getProperty("web.baseUrl") + "/manage_user_page.php");
+        app.registration().selectUser();
+        app.registration().resetPassword();
+
+
 
 
         long now = System.currentTimeMillis();
         String user = format("user%s", now);
-        String password = "password";
+//        String password = "password";
         String email = format("user%s@localhost@localdomain", now);
 //        app.james().createUser(user, password);
 //        app.registration().start(user, email);
