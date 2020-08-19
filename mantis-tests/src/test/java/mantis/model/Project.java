@@ -1,4 +1,4 @@
-package ru.stqa.pft.mantis.model;
+package mantis.model;
 
 public class Project {
 
