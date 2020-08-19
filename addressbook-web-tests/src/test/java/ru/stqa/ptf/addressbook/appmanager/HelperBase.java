@@ -14,6 +14,8 @@ public class HelperBase {
     this.wd = wd;
   }
 
+  protected ApplicationManager app;
+
   protected void click(By locator) {
     wd.findElement(locator).click();
   }

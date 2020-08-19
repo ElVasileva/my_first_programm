@@ -2,6 +2,8 @@ package mantis.appmanager;
 
 import mantis.model.Issue;
 import mantis.model.Issues;
+import mantis.model.UserData;
+import mantis.model.Users;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -22,14 +24,14 @@ public class DbHelper {
     sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
   }
 
-//  public Users usersWithoutAdmin() {
-//    Session session = sessionFactory.openSession();
-//    session.beginTransaction();
-//    List<UserData> result = session.createQuery( "from UserData where access_level = 25" ).list();
-//    session.getTransaction().commit();
-//    session.close();
-//    return new Users(result);
-//  }
+  public Users usersWithoutAdmin() {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<UserData> result = session.createQuery( "from UserData where access_level = 25" ).list();
+    session.getTransaction().commit();
+    session.close();
+    return new Users(result);
+  }
 
   public Issues openIssues() {
     Session session = sessionFactory.openSession();
