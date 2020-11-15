@@ -31,6 +31,12 @@ public class TestBase {
     protected static ApplicationManager app;
     protected WebDriver wd;
 
+  //@BeforeMethod(alwaysRun = true)
+//  @BeforeSuite
+//  public void setUp() throws Exception {
+//    app.init();
+//  }
+
     @BeforeSuite(alwaysRun = true)
     public void setUp() throws Exception {
       app = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
