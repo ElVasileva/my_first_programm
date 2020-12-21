@@ -42,7 +42,7 @@ public class ContactDeletionByModificationTest extends TestBase {
     Contacts before = app.db().contacts();
     ContactData deletedContact = before.iterator().next();
     app.contact().deleteContact(deletedContact);
-    assertThat(app.contact().count(), equalTo(before.size() - 1));
+//    assertThat(app.contact().count(), equalTo(before.size() - 1));
     Contacts after = app.db().contacts();
 
     assertEquals(after.size(), before.size() - 1);

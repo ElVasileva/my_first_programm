@@ -28,16 +28,16 @@ public class SoapTests extends TestBase {
 
   @Test
   public void testGetProjects1() throws MalformedURLException, ServiceException, RemoteException {
-    Set<ru.stqa.pft.mantis.model.Project> projects = app.soap().getProjects();
+    Set<mantis.model.Project> projects = app.soap().getProjects();
     System.out.println(projects.size());
-    for (ru.stqa.pft.mantis.model.Project project : projects) {
+    for (mantis.model.Project project : projects) {
       System.out.println(project.getName());
     }
   }
 
   @Test
   public void testCreateIssue() throws RemoteException, ServiceException, MalformedURLException {
-    Set<ru.stqa.pft.mantis.model.Project> projects = app.soap().getProjects();
+    Set<mantis.model.Project> projects = app.soap().getProjects();
     Issue issue = new Issue().withSummary("Test issue").withDescription("Test Description")
         .withProject(projects.iterator().next());
     Issue created = app.soap().addIssue(issue);

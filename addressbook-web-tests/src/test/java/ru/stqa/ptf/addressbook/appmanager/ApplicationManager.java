@@ -28,14 +28,16 @@ public class ApplicationManager {
   private DbHelper dbHelper;
   private final String browser;
 
-  public ApplicationManager(String browser) throws IOException {
+  public ApplicationManager(String browser) {
     this.browser = browser;
     properties = new Properties();
   }
 
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
-    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+    properties.load(new FileReader(new File(String.format
+        ("src/test/resources/%s.properties", target))));
+
 
     dbHelper = new DbHelper();
 
@@ -50,7 +52,7 @@ public class ApplicationManager {
     } else {
       DesiredCapabilities capabilities = new DesiredCapabilities();
       capabilities.setBrowserName(browser);
-      capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "win10")));
+      capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "win7")));
       wd = new RemoteWebDriver(new URL(properties.getProperty
           ("selenium.server")), capabilities);
     }
@@ -89,9 +91,10 @@ public class ApplicationManager {
     wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
-  public void stop() {
-    wd.quit();
-  }
+//  public void stop() {
+//    sessionHelper.logout();
+//    wd.quit();
+//  }
 
   public void logout() {
     wd.findElement(By.linkText("Logout")).click();

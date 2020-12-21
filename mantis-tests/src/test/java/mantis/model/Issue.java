@@ -23,7 +23,7 @@ public class Issue {
 //  @Transient
   private String description;
 //  @Transient
-  private ru.stqa.pft.mantis.model.Project project;
+  private mantis.model.Project project;
 
 //  @Transient
   private String resolution;
@@ -44,7 +44,7 @@ public class Issue {
     return description;
   }
 
-  public ru.stqa.pft.mantis.model.Project getProject() {
+  public mantis.model.Project getProject() {
     return project;
   }
 
@@ -68,7 +68,7 @@ public class Issue {
     return this;
   }
 
-  public Issue withProject(ru.stqa.pft.mantis.model.Project project) {
+  public Issue withProject(mantis.model.Project project) {
     this.project = project;
     return this;
   }

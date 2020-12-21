@@ -1,6 +1,5 @@
 package mantis.model;
 
-import biz.futureware.mantis.rpc.soap.client.UserData;
 import com.google.common.collect.ForwardingSet;
 
 import java.util.Collection;
