@@ -1490,3 +1490,5 @@
 35944 [main] DEBUG o.h.internal.util.EntityPrinter - ru.stqa.ptf.addressbook.model.GroupData{footer=footer 1, name=test 1, header=header 1, id=298, contacts=<uninitialized>}
 35944 [main] DEBUG o.h.r.j.i.LogicalConnectionManagedImpl - Initiating JDBC connection release from afterTransaction
 35944 [main] DEBUG o.h.r.j.i.LogicalConnectionManagedImpl - Initiating JDBC connection release from afterTransaction
+131206 [pool-1-thread-1] DEBUG o.h.e.j.c.i.DriverManagerConnectionProviderImpl - Connection pool now considered primed; min-size will be maintained
+138313 [main] INFO  r.s.ptf.addressbook.tests.TestBase - Stop test testRemoveContactInGroup with parameters []
