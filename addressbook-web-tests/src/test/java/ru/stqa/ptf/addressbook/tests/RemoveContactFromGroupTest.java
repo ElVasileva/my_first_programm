@@ -30,7 +30,7 @@ public class RemoveContactFromGroupTest extends TestBase {
   }
 
   @Test
-  public void testAddContactToGroup() {
+  public void testRemoveContactToGroup() {
     Contacts beforeContacts = app.db().contacts();
     ContactData removeContact = beforeContacts.iterator().next();
     GroupData testGroup = findOrAddGroup(removeContact);
@@ -68,5 +68,5 @@ public class RemoveContactFromGroupTest extends TestBase {
     }
     return result;
   }
-  
+
 }
